@@ -4,11 +4,11 @@ import resolveFrom from 'resolve-from';
 import { namespaceToCamel, hyphenToCamel } from './camelize';
 import cssToObj from './cssToObj';
 //
-// These visitors normalize the SVG into the primitives from react-sketchapp:
+// These visitors normalize the SVG into the primitives from react-primitives-svg:
 //
 
-// TODO: derrive known types from react-sketchapp
-// import { Svg } from 'react-sketchapp';
+// TODO: derrive known types from react-primitives-svg
+// import { Svg } from 'react-primitives-svg';
 
 const knownTypes = [
   'Svg',
@@ -117,8 +117,6 @@ export default (t, ancestor, state) => ({
         console.warn('WARNING: Removing incompatible node "%s" in file "%s".', path.node.name.name, svgPath);
       }
       path.parentPath.remove();
-    } else if (memberIdentifier === 'Svg') {
-      path.node.name = t.jSXIdentifier(memberIdentifier);
     } else {
       path.node.name = t.jSXMemberExpression(t.jSXIdentifier('Svg'), t.jSXIdentifier(memberIdentifier));
     }

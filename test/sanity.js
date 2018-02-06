@@ -10,13 +10,13 @@ function assertReactImport(result) {
     throw new Error('more or less than one match found');
   }
 }
-function assertReactSketchappImport(result) {
-  const match = result.code.match(/import { Svg } from 'react-sketchapp'/g);
+function assertReactPrimitivesSvgImport(result) {
+  const match = result.code.match(/import Svg from 'react-primitives-svg'/g);
   if (!match) {
-    throw new Error('no react-sketchapp import found');
+    throw new Error('no react-primitives-svg import found');
   }
   if (match.length !== 1) {
-    throw new Error('more or less than one react-sketchapp match found');
+    throw new Error('more or less than one react-primitives-svg match found');
   }
 }
 
@@ -31,8 +31,8 @@ transformFile('test/fixtures/test.jsx', {
 }, (err, result) => {
   if (err) throw err;
   assertReactImport(result);
-  assertReactSketchappImport(result);
-  // console.log('test/fixtures/test.jsx\n\n%s\n\n', highlight(result.code));
+  assertReactPrimitivesSvgImport(result);
+  console.log('test/fixtures/test.jsx\n\n%s\n\n', highlight(result.code));
 });
 
 transformFile('test/fixtures/test-no-react.jsx', {
@@ -47,7 +47,7 @@ transformFile('test/fixtures/test-no-react.jsx', {
   assertReactImport(result);
 });
 
-transformFile('test/fixtures/test-no-react-sketchapp.jsx', {
+transformFile('test/fixtures/test-no-react-primitives-svg.jsx', {
   babelrc: false,
   presets: ['react'],
   plugins: [
@@ -55,8 +55,8 @@ transformFile('test/fixtures/test-no-react-sketchapp.jsx', {
   ],
 }, (err, result) => {
   if (err) throw err;
-  // console.log('test/fixtures/test-no-react-sketchapp.jsx', result.code);
-  assertReactSketchappImport(result);
+  // console.log('test/fixtures/test-no-react-primitives-svg.jsx', result.code);
+  assertReactPrimitivesSvgImport(result);
 });
 
 transformFile('test/fixtures/test-case-sensitive.jsx', {

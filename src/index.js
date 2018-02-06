@@ -37,12 +37,12 @@ export default ({ types: t }) => ({
     Program: {
       enter({ scope, node }, { file }) {
         if (!scope.hasBinding('Svg')) {
-          const reactSketchAppImportDeclaration = t.importDeclaration([
-            t.importSpecifier(t.identifier('Svg'), t.identifier('Svg')),
-          ], t.stringLiteral('react-sketchapp'));
-          file.set('ensureReactSketchapp', () => { node.body.unshift(reactSketchAppImportDeclaration); });
+          const reactPrimitivesSvgImportDeclaration = t.importDeclaration([
+            t.importDefaultSpecifier(t.identifier('Svg')),
+          ], t.stringLiteral('react-primitives-svg'));
+          file.set('ensureReactPrimitivesSvg', () => { node.body.unshift(reactPrimitivesSvgImportDeclaration); });
         } else {
-          file.set('ensureReactSketchapp', () => {});
+          file.set('ensureReactPrimitivesSvg', () => {});
         }
         if (!scope.hasBinding('React')) {
           const reactImportDeclaration = t.importDeclaration([
@@ -127,7 +127,7 @@ export default ({ types: t }) => ({
           path.replaceWith(svgReplacement);
         }
         file.get('ensureReact')();
-        file.get('ensureReactSketchapp')();
+        file.get('ensureReactPrimitivesSvg')();
       }
     },
   },

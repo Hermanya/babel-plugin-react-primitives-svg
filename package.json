@@ -1,7 +1,7 @@
 {
-  "name": "babel-plugin-react-sketchapp-svg",
+  "name": "babel-plugin-react-primitives-svg",
   "version": "1.0.0-beta4",
-  "description": "A babel plugin that transforms SVG imports into react-sketchapp-compatible primitives.",
+  "description": "A babel plugin that transforms SVG imports into react-primitives-svg compatible components.",
   "main": "lib/index.js",
   "scripts": {
     "test": "babel-node test/sanity.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alampros/babel-plugin-react-sketchapp-svg.git"
+    "url": "git+https://github.com/hermanya/babel-plugin-react-primitives-svg.git"
   },
   "keywords": [
     "babel",
@@ -20,14 +20,18 @@
     "svg",
     "inline",
     "sketchapp",
-    "sketch"
+    "sketch",
+    "react-native",
+    "react-dom",
+    "primitives",
+    "react-primitives"
   ],
-  "author": "Aaron Lampros <alampros@gmail.com>",
+  "author": "Herman Starikov <hermanstarikov@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/alampros/babel-plugin-react-sketchapp-svg/issues"
+    "url": "https://github.com/hermanya/babel-plugin-react-primitives-svg/issues"
   },
-  "homepage": "https://github.com/alampros/babel-plugin-react-sketchapp-svg#readme",
+  "homepage": "https://github.com/hermanya/babel-plugin-react-primitives-svg#readme",
   "devDependencies": {
     "babel-cli": "^6.14.0",
     "babel-core": "^6.14.0",
@@ -39,13 +43,14 @@
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.2.2",
     "highlight-es": "^1.0.1",
-    "react": "^15.3.1"
+    "react": "^16.2.0"
   },
   "dependencies": {
     "babel-template": "^6.15.0",
     "babel-traverse": "^6.15.0",
     "babylon": "^6.10.0",
     "lodash.isplainobject": "^4.0.6",
+    "react-primitives-svg": "^0.0.3",
     "resolve-from": "^2.0.0",
     "svgo": "^0.7.0"
   }

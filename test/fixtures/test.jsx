@@ -1,5 +1,5 @@
 import React from 'react';
-import { Svg } from 'react-sketchapp';
+import Svg from 'react-primitives-svg';
 import Check from './check.svg';
 
 export class MyClassIcon extends React.Component {
