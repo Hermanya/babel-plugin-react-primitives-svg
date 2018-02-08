@@ -1,4 +1,6 @@
 # babel-plugin-react-primitives-svg
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FHermanya%2Fbabel-plugin-react-primitives-svg.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FHermanya%2Fbabel-plugin-react-primitives-svg?ref=badge_shield)
+
 
 A babel plugin that transforms SVG imports into
  [react-primitives-svg](https://github.com/chengyin/react-primitives-svg)-compatible [primitives](https://github.com/lelandrichardson/react-primitives).
@@ -53,3 +55,7 @@ Example:
 }
 
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FHermanya%2Fbabel-plugin-react-primitives-svg.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FHermanya%2Fbabel-plugin-react-primitives-svg?ref=badge_large)
