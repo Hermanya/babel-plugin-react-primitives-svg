@@ -11,11 +11,17 @@ import transformSvg from './transformSvg';
 import fileExistsWithCaseSync from './fileExistsWithCaseSync';
 
 const buildSvg = template(`
-  var SVG_NAME = function SVG_NAME(props) { return SVG_CODE; };
+  var SVG_NAME = function SVG_NAME(props) {
+    let {styleProps, ...svgProps} = props
+    return SVG_CODE;
+  };
 `);
 
 const buildSvgWithDefaults = template(`
-  var SVG_NAME = function SVG_NAME(props) { return SVG_CODE; };
+  var SVG_NAME = function SVG_NAME(props) {
+    let {styleProps, ...svgProps} = props
+    return SVG_CODE;
+  };
   SVG_NAME.defaultProps = SVG_DEFAULT_PROPS_CODE;
 `);
 
@@ -76,9 +82,15 @@ export default ({ types: t }) => ({
           throw new Error(`File path didn't match case of file on disk: ${svgPath}`);
         }
         const rawSource = readFileSync(svgPath, 'utf8');
+
+        // XXX: this is a workaround for styling svg icons without currenctColor on react-native-svg
+        const preprocessedSource = rawSource
+          .replace(/<svg[^>]+>/, $1 => `${$1}<g data-id="currentColor-workaround">`)
+          .replace(/<\/svg>/, $1 => `</g>${$1}`);
+
         const optimizedSource = state.opts.svgo === false
-          ? rawSource
-          : optimize(rawSource, state.opts.svgo);
+          ? preprocessedSource
+          : optimize(preprocessedSource, state.opts.svgo);
 
         const escapeSvgSource = escapeBraces(optimizedSource);
 
@@ -98,7 +110,7 @@ export default ({ types: t }) => ({
 
         // Move props off of element and into defaultProps
         if (svgCode.openingElement.attributes.length > 1) {
-          const keepProps = [t.jSXSpreadAttribute(t.identifier('props'))];
+          const keepProps = [t.jSXSpreadAttribute(t.identifier('svgProps'))];
           const defaultProps = [
             t.objectProperty(t.identifier('width'), getDefaultDimensionOptionProperty(t, defaultWidth)),
             t.objectProperty(t.identifier('height'), getDefaultDimensionOptionProperty(t, defaultHeight)),
@@ -116,6 +128,9 @@ export default ({ types: t }) => ({
           });
 
           svgCode.openingElement.attributes = keepProps;
+
+          svgCode.children[0].openingElement.attributes = [t.jSXSpreadAttribute(t.identifier('styleProps'))];
+
           opts.SVG_DEFAULT_PROPS_CODE = t.objectExpression(defaultProps);
         }
 
