@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-react-primitives-svg",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A babel plugin that transforms SVG imports into react-primitives-svg compatible components.",
   "main": "lib/index.js",
   "scripts": {
