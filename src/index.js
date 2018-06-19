@@ -12,14 +12,18 @@ import fileExistsWithCaseSync from './fileExistsWithCaseSync';
 
 const buildSvg = template(`
   var SVG_NAME = function SVG_NAME(props) {
-    let {styleProps, ...svgProps} = props
+    function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+    var styleProps = props.styleProps,
+    svgProps = _objectWithoutProperties(props, ["styleProps"]);
     return SVG_CODE;
   };
 `);
 
 const buildSvgWithDefaults = template(`
   var SVG_NAME = function SVG_NAME(props) {
-    let {styleProps, ...svgProps} = props
+    function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+    var styleProps = props.styleProps,
+    svgProps = _objectWithoutProperties(props, ["styleProps"]);
     return SVG_CODE;
   };
   SVG_NAME.defaultProps = SVG_DEFAULT_PROPS_CODE;
