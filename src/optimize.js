@@ -54,6 +54,16 @@ function validateAndFix(opts) {
 
 export default function optimize(content, opts = {}) {
   validateAndFix(opts);
+  opts.plugins = opts.plugins || [];
+  if (opts.plugins.some(_ => _.collapseGroups)) {
+    opts.plugins.filter(_ => _.collapseGroups)
+      .map((_) => {
+        _.collapseGroups = false;
+        return _;
+      });
+  } else {
+    opts.plugins.push({ collapseGroups: false });
+  }
   const svgo = new Svgo(opts);
 
   // Svgo isn't _really_ async, so let's do it this way:
